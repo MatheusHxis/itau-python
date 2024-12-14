@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Restrita - Gerente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/telalogada.css') }}">
+    <script>
+        // Função para abrir o modal de adicionar usuário
+        function openModalAdicionar() {
+            document.getElementById('modalAdicionar').style.display = 'block';
+        }
+
+        // Função para abrir o modal de atualizar e-mail
+        function openModalAtualizar() {
+            document.getElementById('modalAtualizar').style.display = 'block';
+        }
+
+        // Função para fechar os modais
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+    </script>
+    <style>
+        /* Estilo para os botões ficarem um ao lado do outro */
+        .botao-container {
+            display: flex;
+            gap: 10px; /* Espaçamento entre os botões */
+            justify-content: flex-start; /* Alinha os botões à esquerda */
+            margin-bottom: 20px; /* Adiciona um espaço abaixo dos botões */
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="conteudoLogin">
+            <h2>Área Restrita - Gerente</h2>
+            <p>Bem-vindo à área de controle de usuários.</p>
+
+            <!-- Exibe a mensagem de sucesso ou erro -->
+            {% if msg %}
+                <div class="msg-success">
+                    <p>{{ msg }}</p>
+                </div>
+            {% endif %}
+
+            <h3>Usuários Cadastrados</h3>
+            <div class="usuarios-container">
+                {% for usuario in usuarios %}
+                    <div class="usuario-card">
+                        <h4>{{ usuario.nome }}</h4>
+                        <p><strong>Email:</strong> {{ usuario.email }}</p>
+
+                        <!-- Formulário para remover o usuário -->
+                        <form action="{{ url_for('remover_usuario') }}" method="POST">
+                            <input type="hidden" name="index" value="{{ loop.index0 }}">
+                            <button type="submit" class="btn">Remover</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h3>Adicionar e Alterar Usuário</h3>
+
+            <!-- Container para os botões -->
+            <div class="botao-container">
+                <button class="btn" onclick="openModalAdicionar()">Adicionar Usuário</button>
+                <button class="btn" onclick="openModalAtualizar()">Alterar E-mail</button>
+            </div>
+
+            <!-- Modal para adicionar o novo usuário -->
+            <div id="modalAdicionar" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modalAdicionar')">&times;</span>
+                    <form action="{{ url_for('area_restrita') }}" method="post" class="formulario">
+                        <label for="novoNome">Nome do Usuário:</label>
+                        <input type="text" id="novoNome" name="novoNome" placeholder="Digite o nome" required>
+
+                        <label for="novoEmail">E-mail do Usuário:</label>
+                        <input type="email" id="novoEmail" name="novoEmail" placeholder="Digite o e-mail" required>
+
+                        <button type="submit" class="btn">Adicionar Usuário</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal para atualizar o e-mail do usuário -->
+            <div id="modalAtualizar" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modalAtualizar')">&times;</span>
+                    <form action="{{ url_for('area_restrita') }}" method="post" class="formulario">
+                        <label for="usuarioNome">Nome do Usuário:</label>
+                        <select name="usuarioNome" id="usuarioNome" required>
+                            {% for usuario in usuarios %}
+                                <option value="{{ usuario.nome }}">{{ usuario.nome }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="novoEmail">Novo E-mail:</label>
+                        <input type="email" id="novoEmail" name="novoEmail" placeholder="Digite o novo e-mail" required>
+
+                        <button type="submit" class="btn">Atualizar E-mail</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Botão de logout -->
+            <form action="{{ url_for('logout') }}" method="POST">
+                <button type="submit" class="btn">Sair</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

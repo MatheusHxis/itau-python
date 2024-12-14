@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    margin: 0px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    background-image: url(../Itau-Cover.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: grid;
+    height: 80%;
+    width: 80%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 2px 2px 20px black;
+}
+
+.conteudoLogin {
+    background-color: #FFFFFF;
+    margin: auto;
+    text-align: center;
+}
+.conteudoLogin > h2{
+    margin-bottom: 20px;
+    color: #ff6200;
+    font-weight: 900;
+    font-size: 30px;
+}
+.conteudoLogin > p{
+    margin-bottom: 30px;
+    color: #A19292;
+    font-weight: 400;
+}
+form{
+    margin: auto;
+    margin-top: 10px;
+    width: 500px;
+}
+form > input {
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 17px;
+    padding-left: 60px;
+}
+form > input::placeholder {
+    font-size: 16px;
+    color: #9C9C9C;
+    
+}
+form > button{
+    display: flex;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: #ff6200;
+    justify-content: center;
+    padding: 13px;
+    width: 250px;
+    border-radius: 50px;
+    font-size: 20px;
+    border-bottom: none;
+    font-weight: 800;
+    color: white;
+}
+form a{
+    text-decoration: none;
+    color: black;
+}
+button:hover{
+    transition: all 200ms ease-in;
+    transform: scale(1.1);
+}

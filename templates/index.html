@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Acesso Itaú Gerente</title>
+</head>
+<body>
+    <main>
+        <div class="conteudoLogin">
+            <h2>Acesse sua Conta Itaú</h2>
+            <p>Conta Nível Gerente</p>
+
+            <form action="/" method="POST">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            {% if request.args.get('erro') %}
+                <p style="color:red;">Credenciais inválidas. Tente novamente.</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
